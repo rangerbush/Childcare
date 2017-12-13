@@ -1,0 +1,10 @@
+CREATE TABLE `account` (
+  `UID` int(16) unsigned NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(30) NOT NULL,
+  `Password` varchar(30) NOT NULL,
+  `Email` varchar(30) DEFAULT NULL,
+  `Phone` varchar(15) DEFAULT NULL,
+  `discard` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 for account in use,1 for account discarded.',
+  PRIMARY KEY (`UID`),
+  UNIQUE KEY `UserName_UNIQUE` (`UserName`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8

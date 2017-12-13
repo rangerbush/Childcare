@@ -1,0 +1,8 @@
+CREATE TABLE `anchorgroup` (
+  `GID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `GroupName` varchar(45) NOT NULL,
+  `UID` int(16) unsigned NOT NULL,
+  PRIMARY KEY (`GID`),
+  KEY `FK_account_idx` (`UID`),
+  CONSTRAINT `FK_account` FOREIGN KEY (`UID`) REFERENCES `account` (`UID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8

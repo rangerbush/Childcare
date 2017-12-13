@@ -1,0 +1,9 @@
+CREATE TABLE `anchor` (
+  `GID` int(11) unsigned NOT NULL,
+  `SeqID` int(10) unsigned NOT NULL,
+  `Longitude` decimal(9,6) unsigned zerofill NOT NULL,
+  `Latitude` decimal(9,6) unsigned zerofill NOT NULL,
+  `Radius` decimal(7,1) unsigned NOT NULL COMMENT 'in meters',
+  PRIMARY KEY (`GID`,`SeqID`),
+  CONSTRAINT `FK_anchour_group` FOREIGN KEY (`GID`) REFERENCES `anchorgroup` (`GID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
