@@ -1,0 +1,126 @@
+1.
+http://localhost:8080/SpringHost/account/findUID/{username}
+Method: get
+Accept:JSON/XML
+Desc:Find the UID for one UserName
+Input a string as query UserName
+Output: plain number as UID like 3 or 7
+	or Error msg like "FAIL: Cannot find Matching result."
+
+==============
+2.
+http://localhost:8080/SpringHost/account/register
+Method: POST
+Accept: JSON/XML
+Body:JSON
+Encoding: UTF-8
+RAW body:
+{
+    "uid": 1,
+    "userName": "username5",
+    "password": "Passwd",
+    "email": "EmailAddress@mai.com",
+    "phone": "0450912789",
+    "discard": false,
+    "anchorgroupCollection": null
+}
+//UID:this field will be ignored so just use 1.
+//Discard: this field will be held as false.
+//The rest four field are string.
+Desc: Create a new Account, with auto given UID and fixed discard field as fault.
+Input:Payload in RAW body.
+Output: UID of this account.
+====
+
+3. http://localhost:8080/SpringHost/account/demo/{uid}
+Get, Accpet:JSON/XML
+DESC: get a demo of account json instance.
+
+==========
+4.
+http://localhost:8080/SpringHost/account/delete
+POST, Accept:JSON XML
+Body:JSON
+Encoding: UTF-8
+RAW body:
+{
+    "uid": 20,
+    "userName": "username6",
+    "password": "-1911513410",
+    "email": "EmailAddress@mai.com",
+    "phone": "0450912789",
+    "discard": false,
+    "anchorgroupCollection": null
+}
+DESC:
+Move one effective account out of effect.
+Outcome:
+SUCC --> successful
+"FAIL: "+e.getMessage()  --> rare exception. Shall not happen. Let me know if u see any(in this method).
+"ERR: Password does not match or Account already discared."  --> password does not match / already discarded( discard != 0, or discard = true in another word);
+ERID: NO UID in database match given one. -->"+e.getMessage() --> NO UID found matching given one(from raw body).
+===
+5.
+http://localhost:8080/SpringHost/account/Update
+POST, Accept JSON/XML
+BODY:
+JSON,utf8,
+RAW body:
+{
+    "uid": 19,
+    "userName": "username5",
+    "password": "-1911513410",
+    "email": "Emaili.com",
+    "phone": "04509789",
+    "discard": false,
+    "anchorgroupCollection": null
+}
+Desc:Update Email or/and Phone information through an account instance.
+Only account not discarded can be updated.
+Outcome:
+"ERID: NO UID in database match given one. -->"+e.getMessage();  --->if no matching UID found
+"ERR: this account is already discarded.";  --> Account Discarded
+"ERR: Password in database does not match given one.";   -->Original Password doesnt match
+"FAIL: "+ e.getMessage();  --> Other error msg
+SUCC  ---> if successful
+
+============
+6.
+http://localhost:8080/SpringHost/account/Password
+POST Accept JSON/XML
+BODY utf8,JSON
+RAW:
+
+Outcome
+SUCC -->successful
+ERRP: Orgiginal Password does not match record in DataBase.";  --> Failed in validation(incorrect original password)
+"FAIL: error during transcation."+e.getMessage();  --> Other failure, see following message for detail. Contact me if needed.
+
+Desc:
+A method used to change password using a specific class. Call the following method (http://localhost:8080/SpringHost/account/psdChangerDemo) to see json demo.
+The class used should have the following fields:
+    private long UID;
+    private String orgPasswd;
+    private String newPasswd;
+
+A json for it should looks like
+{
+    "orgPasswd": "oldpsd",
+    "newPasswd": "newPsd",
+    "uid": 2
+}
+
+
+
+===
+7.
+http://localhost:8080/SpringHost/account/psdChangerDemo
+GET
+This is a demo of what the instance used for changing password looks like.
+{
+    "orgPasswd": "oldpsd",
+    "newPasswd": "newPsd",
+    "uid": 2
+}
+
+
