@@ -1,0 +1,62 @@
+/SpringHost/device/****
+
+1. 
+/register
+POST
+Function: Create
+
+Use fetch method to obtain a sample of device json instance.
+Demo:
+{
+    "deviceAuditCollection": null,
+    "longitude": 120.2451230,
+    "latitude": 57.9999999,
+    "deviceID": "123",
+    "pulse": 33,
+    "fid": {
+        "fid": 11111115,
+        "familyName": null,
+        "familyPassword": "passwd",
+        "accountCollection": null,
+        "deviceCollection": null,
+        "anchorgroupCollection": null
+    }
+}
+Leave pulse as 0 or null if there is no data on it.
+Must have a FID with corresponding password included in POST.(Security check applied)
+
+Response:
+1. SUCC if successful
+2. Invalid FamilyID or FamilyPassword if family record of given FID is found but given password does not match the record.
+3. exception msg  in other cases.
+======================
+2. "/fetch/{id}/{family}"
+GET
+Function: Read
+Arg:
+id: device ID, String
+family:family id, int
+
+Return:
+1. Normally one device instance
+2. When something goes wrong, a response containing exception msg
+3. In very rare case, a response saying "Invalid Family ID". Contact me if this happen, which should not happen.
+
+Use DID 123 and FID 11111111 to grab a sample of device json instance
+====================
+3.
+/update
+POST
+Use fetch method to obtain a sample of device json instance.
+Function:Update
+
+Response:
+1. SUCC if successful
+2. Invalid FamilyID or FamilyPassword   if family record of given FID is found but given password does not match the one in record.
+3. Exception msg if other failure happens
+
+Note:
+modification in deviceID is not accepted.
+Must provide FamilyID and FamilyPassword
+Fields can be changed:
+FID, Long, Lat, Pulse

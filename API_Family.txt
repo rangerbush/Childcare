@@ -1,0 +1,56 @@
+/SpringHost/family/****
+
+1. register
+POST
+FUNCTION:create
+DESC: create a new record in table, with auto-generated FamilyID
+Return:
+1. familyID  if everything goes fine. However, if you received 0, please contact me as that is abnormal.
+2. exception msg if there is an error
+
+DEMO
+{
+    "fid": 11111115,
+    "familyName": "Ciri",
+    "familyPassword": "$2a$10$yB.HcTGEpFukp25q6ETCV.1ee1O09DGX14li2EGpE1kBohyQSgWwu",
+    "accountCollection": null,
+    "deviceCollection": null,
+    "anchorgroupCollection": null
+}
+Note:
+as you can see, password received from client will be hashed using BCrypt with dynamic salt, however hashing raw text is still recommended in client. Ideally raw password from user input will be hashed somehow and transmitted to server, and this hashed password will be hashed again, and the salt used for each hash will be random thus different hash results using the same input will be different.
+In this case, "raw" password is "passwd". You may need to create your owm family record once you have applied hashing in client.
+
+=======
+2. fetch/{fid}
+GET
+FUNCTION:read
+DESC: read the record of given fid. Password field will be left as null.
+Response: 
+1. family instance if things go smoothly
+2. exceptional msg if go wrong
+
+sample: fid 11111115, password: passwd
+
+====================
+
+3. update
+POST
+FUNCTION:update
+DESC: update the record of given fid.
+Response:
+1. Input password does not match the record. 
+{
+    "response": "Input password does not match the record."
+}
+2. SUCC
+{
+    "response": "SUCC"
+}
+3. exception msg
+{
+    "response": "Incorrect result size: expected 1, actual 0"
+}
+
+Only family name can be modified. Must provide correct password to do so.
+In general, client won't be able to do anything with familyID except passively receiving one from registration and using exsiting one to run query.
