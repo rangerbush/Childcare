@@ -1,0 +1,54 @@
+/group
+
+1. /update
+POST
+DESC:Update. Must provide corresponding fid and familypassword, or you may receive a Invalid FamilyID or FamilyPassword response or a 500 error.
+Response:
+1. SUCC if done
+2. exceptional msg | Invalid FamilyID or FamilyPassword | 500 error if family ID&password check failed or input fid did not belong to the group or other exception happened
+
+{
+    "inLat": -34.253450,
+    "inLong": 45.678821,
+    "inRadius": 45.3,
+    "exLat": -34.253450,
+    "exLong": 45.678821,
+    "exRadius": 80,
+    "type": 0,
+    "actionSetCollection": null,
+    "fid": {
+        "fid": 11111115,
+        "familyName": null,
+        "familyPassword": "passwd",
+        "accountCollection": null,
+        "deviceCollection": null,
+        "anchorgroupCollection": null
+    },
+    "gid": 113,
+    "groupName": "testgroup",
+    "anchorCollection": null,
+    "uid": null
+}
+
+========
+2. register
+POST
+DESC: create
+NOTE: GID field can be anything as server will receive a auto generated GID as PK instead of using user input.
+Response:
+1. Gid of create record
+2. exceptional msg | Invalid FamilyID or FamilyPassword | 500 error if family ID&password check failed or input fid did not belong to the group or other exception happened
+
+=====
+3./fetch/{gid}
+GET
+DESC: read
+demo:
+http://localhost:8080/SpringHost/group/fetch/132
+Response:
+1. group instance
+2. exception msg
+
+
+
+
