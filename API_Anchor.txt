@@ -45,3 +45,48 @@ anchor instance have an index named as SeqID. It will be auto maintained with a 
 Response:
 Empty List or GID integrity failure if list is empty or gid doesn't match
 Max seqID or current group.
+
+2."/fetch/{gid}/{seq}/{pw}", method = GET
+{gid}: group id
+{seq}: SeqID
+{pw}: password of family related
+response:
+"Incorrect Password"
+exception msg
+SUCC
+
+
+3.
+"/delete/{passwd}", method = POST
+{passwd}":password of family related
+BODY: List<Anchor>
+Response:
+"Empty List or GID integrity failure"  --All elements in list must belong to the same group/list is empty
+"Invalid FamilyID or FamilyPassword" --password doesn't match family related
+exceptional msg
+SUCC
+
+
+4."/fetch"  GET
+get all records
+response: a list containing all anchors
+
+5. "/update/{passwd}", method = POST
+{passwd}":password of family related
+BODY: List<Anchor>  -- a list of anchors
+Response:
+"Empty List or GID integrity failure"  --All elements in list must belong to the same group/list is empty
+"Invalid FamilyID or FamilyPassword" --password doesn't match family related
+exceptional msg
+SUCC
+
+
+6.
+"/fetchgid/{gid}/{pw}", method = GET
+{gid} Long, Group ID
+{pw} password of family involved
+This method allow you to search all anchors related to one group
+return:
+List<anchor>
+"Incorrect Password"
+exceptional msg
