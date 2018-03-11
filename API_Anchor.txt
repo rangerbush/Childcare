@@ -1,0 +1,47 @@
+[{
+    "anchorPK": {
+        "gid": 132,
+        "seqID": 1
+    },
+    "longitude": 56.163000,
+    "latitude": -34.672000,
+    "radius": 20.0,
+    "anchorgroup": null
+}, {
+    "anchorPK": {
+        "gid": 132,
+        "seqID": 2
+    },
+    "longitude": 56.163000,
+    "latitude": -34.672000,
+    "radius": 20.0,
+    "anchorgroup": null
+}, {
+    "anchorPK": {
+        "gid": 132,
+        "seqID": 3
+    },
+    "longitude": 56.163000,
+    "latitude": -34.672000,
+    "radius": 20.0,
+    "anchorgroup": null
+}, {
+    "anchorPK": {
+        "gid": 133,
+        "seqID": 1
+    },
+    "longitude": 56.163000,
+    "latitude": -34.672000,
+    "radius": 20.0,
+    "anchorgroup": null
+}]
+
+1.
+"/register/{pw}", method = POST
+input a list of anchor instances in body which share the same GID
+input password in {pw}
+Note:
+anchor instance have an index named as SeqID. It will be auto maintained with a field called MaxSeq in Group in an auto-increaseing mannar.
+Response:
+Empty List or GID integrity failure if list is empty or gid doesn't match
+Max seqID or current group.

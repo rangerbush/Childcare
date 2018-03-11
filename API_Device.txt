@@ -30,17 +30,19 @@ Response:
 2. Invalid FamilyID or FamilyPassword if family record of given FID is found but given password does not match the record.
 3. exception msg  in other cases.
 ======================
-2. "/fetch/{id}/{family}"
+2. "/fetch/{id}/{family}/{passwd}"
 GET
 Function: Read
 Arg:
 id: device ID, String
 family:family id, int
+passwd:password for validation
 
 Return:
 1. Normally one device instance
 2. When something goes wrong, a response containing exception msg
-3. In very rare case, a response saying "Invalid Family ID". Contact me if this happen, which should not happen.
+3. "Invalid FamilyID or FamilyPassword"
+4. In very rare case, a response saying "Invalid Family ID". Contact me if this happen, which should not happen.
 
 Use DID 123 and FID 11111111 to grab a sample of device json instance
 ====================
@@ -60,3 +62,7 @@ modification in deviceID is not accepted.
 Must provide FamilyID and FamilyPassword
 Fields can be changed:
 FID, Long, Lat, Pulse
+
+===========
+4. 
+/delete/{id}/{family}/{passwd}

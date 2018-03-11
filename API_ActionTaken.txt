@@ -1,0 +1,61 @@
+1
+/register/{pw}", method = POST
+Argu:
+{pw}£» password of the family involved in GID contained in this "create" behavior
+BODY:ActionTaken instance
+Response:
+SUCC
+exception msg
+"Password validation failed. Transaction abort." --when password does not match record of given family.
+
+2.
+ "/demo/{pw}", method = GET
+Argu:
+{pw}:ADMIN password, use string 123456 for now to get the first instance of ActionTaken in table for a demo
+
+3.
+"/demopk", method = GET
+get an ActionTakenPK instance demo
+
+4.
+"/fetch/{pw}", method = POST
+argu:
+{pw} password of given family related.
+BODY:ActionTakenPK instance
+Response:
+SUCC
+exception msg
+"Password validation failed. Transaction abort." --when password does not match record of given family.
+
+5.
+ "/update/{pw}/{status}", method = POST
+argu:
+{pw} password of given family
+{status} one int field of actionTaken, means nothing for now.
+BODY:ActionTakenPK instance --PK of record you want to modify
+NOTE: this method only allow you to modify status field.
+Response:
+SUCC
+exception msg
+"Password validation failed. Transaction abort." --when password does not match record of given family.
+
+6.
+ "/delete/{pw}", method = POST
+argu:
+{pw} password of family related
+BODY:ActionTakenPK --pk of the record to be deleted.
+
+
+ActionTaken DEMO
+
+    {
+    "response": {
+        "actionTakenPK": {
+            "aid": 1,
+            "gid": 132
+        },
+        "status": 0,
+        "actionSet": null,
+        "anchorgroup": null
+         }
+    }

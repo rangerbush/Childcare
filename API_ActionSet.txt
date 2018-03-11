@@ -1,0 +1,52 @@
+1."/register/{pw}", method = POST
+BODY:string desc
+
+{pw} is a string standing for administration password, which is "123456" for now.
+This method allows you to create a new ActionSet instance. ActionSet Id will be auto allocated. You need to upload the description field of your new row in HTTP body.
+
+return:
+AID of generated row, or error message accordingly.
+
+{
+    "discard": false,
+    "aid": 1,
+    "desc": "DO Nothing",
+    "anchorgroupCollection": null
+}
+
+
+2."/fetch/{aid}", method = GET
+{aid}: integer, the aid of row you want to query.
+Return:
+instance of actionset or exception
+Note:
+Those records whos discarded flag set as 1 will be IGNORED.
+
+3."/delete/{pw}/{aid}", method = GET
+pw:String admin password
+aid: int, ActionID
+return:
+SUCC if successful
+exceptional msg
+"Invalid Administration Password" if input password is null or doesn't match recorded password(even it is empty)
+Note: record will not be deleted but the discard flag will be set as 1.
+
+4."/recover/{pw}/{aid}", method = GET
+pw:String admin password
+aid: int, ActionID
+return:
+SUCC if successful (nothing goes wrong)
+exceptional msg
+"Invalid Administration Password" if input password is null or doesn't match recorded password(even it is empty)
+Note: This will try to recover a discarded record. It may return no error when actually effected 0 row.
+
+5."/update/{pw}", method = POST
+pw:String admin password
+BODY: actionSet instance
+return:
+SUCC if successful (nothing goes wrong)
+exceptional msg
+"Invalid Administration Password" if input password is null or doesn't match recorded password(even it is empty)
+Note:
+Only desc field could be changed. You need to call delete or recover method to modify discard flag.
+

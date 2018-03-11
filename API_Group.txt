@@ -13,8 +13,9 @@ Response:
     "inRadius": 45.3,
     "exLat": -34.253450,
     "exLong": 45.678821,
-    "exRadius": 80,
+    "exRadius": 80.0,
     "type": 0,
+    "maxSeq": 0,
     "actionSetCollection": null,
     "fid": {
         "fid": 11111115,
@@ -24,11 +25,20 @@ Response:
         "deviceCollection": null,
         "anchorgroupCollection": null
     },
-    "gid": 113,
+    "gid": 132,
     "groupName": "testgroup",
     "anchorCollection": null,
     "uid": null
 }
+
+    "inLat": -34.253450,
+    "inLong": 45.678821,
+    "inRadius": 45.3  ---------paras of largest inner circle
+    "exLat": -34.253450,
+    "exLong": 45.678821,
+    "exRadius": 80.0,  --------paras of smallest outer circle
+    "type": 0,   ----0 for circle, 1 for pipe
+    "maxSeq": 0, ----pointer of maximun seq ID in this group, 0 as default
 
 ========
 2. register

@@ -54,3 +54,25 @@ Response:
 
 Only family name can be modified. Must provide correct password to do so.
 In general, client won't be able to do anything with familyID except passively receiving one from registration and using exsiting one to run query.
+
+==========
+4. changepw/{newPassword}
+POST
+function:change password
+desc:
+this function require an input family instance in body, containing fid and old password. FID and old password will be used for validation, and the password field will be the only field updated using new password provided in pathvariable {newPassword}.
+Response:
+1. SUCC
+2. exceptional msg
+
+Note:values in fields except from FID and password DOES NOT MATTER. leave them null if you want.
+
+5.
+"/delete/{fid}/{passwd}"
+get
+DESC:
+delete family record of given fid only if input password matches the one in record
+response:
+succ
+"Invalid FamilyID or FamilyPassword"
+exceptional msg
