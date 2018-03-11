@@ -65,4 +65,11 @@ FID, Long, Lat, Pulse
 
 ===========
 4. 
-/delete/{id}/{family}/{passwd}
+/delete/{id}/{family}/{passwd}   GET
+{id}£ºdevice id
+{family}: family id
+{passwd}: family password
+Response:
+"Given FamilyID does not match record of given DeviceID."
+SUCC
+"Invalid FamilyID or FamilyPassword"
